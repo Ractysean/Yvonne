@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Girlfriend's Day</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 650px;
+            overflow: hidden;
+            text-align: center;
+            margin: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #ff6b6b, #f9bcb7);
+            color: #fff;
+            padding: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+        .header::before {
+            content: "❤️";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+        }
+        .content {
+            padding: 20px 30px;
+        }
+        .content img {
+            max-width: 100%;
+            max-height: 200px; /* Reduce image length */
+            height: auto;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .content p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            margin: 0 0 15px;
+        }
+        .signature {
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        .footer {
+            background-color: #ff6b6b;
+            color: #fff;
+            padding: 15px;
+            font-size: 16px;
+        }
+        .game {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        .gift {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px;
+            background-color: #ff6b6b;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .gift:hover {
+            transform: scale(1.1);
+        }
+        .prize {
+            font-size: 18px;
+            color: #ff6b6b;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+    <script>
+        let giftChosen = false;
+
+        function revealPrize(giftIndex) {
+            if (giftChosen) {
+                alert("You have already chosen your gift, Yvonne!");
+                return;
+            }
+
+            const prizes = [50, 100, 200];
+            const shuffledPrizes = prizes.sort(() => Math.random() - 0.5);
+            const prizeAmount = shuffledPrizes[giftIndex];
+            document.getElementById('prize').textContent = `Congratulations! You won Ksh ${prizeAmount}! 🎉`;
+            document.getElementById('prize').style.display = 'block';
+            giftChosen = true;
+
+            // Fill the form inputs
+            document.getElementById('name').value = 'Yvonne Mueni Kavutha';
+            document.getElementById('email').value = 'yvonne@example.com'; // Replace with her actual email if needed
+            document.getElementById('message').value = `Gift chosen: Ksh ${prizeAmount}`;
+
+            // Submit the form asynchronously
+            const formData = new FormData(document.getElementById('giftForm'));
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+              .then(result => {
+                  console.log('Form submission success:', result);
+                  // Optionally handle success confirmation here
+              }).catch(error => {
+                  console.error('Form submission error:', error);
+                  // Optionally handle error here
+              });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Happy Girlfriend's Day, Yvonne!
+        </div>
+        <div class="content">
+            <img src="https://i.postimg.cc/N0NBVStG/Whats-App-Image-2024-07-27-at-10-39-58-PM.jpg" alt="Yvonne's Picture">
+            <p>My Dearest Yvonne,</p>
+            <p>Today, on Girlfriend's Day, I want to celebrate you and all the joy you bring into my life. Your love is a treasure, and your presence is my greatest gift. Every moment with you is a cherished memory.</p>
+            <p>You are my sunshine on cloudy days and my guiding star at night. Thank you for being you, for being here, and for making my life so beautiful.</p>
+            <p>I hope you have a fantastic day at your attachment! You're doing amazing things, and I'm so proud of you.</p>
+            <p class="signature">With endless love,</p>
+            <p class="signature">Andrew</p>
+        </div>
+        <div class="game">
+            <p>Choose a gift to reveal your prize:</p>
+            <div class="gift" onclick="revealPrize(0)">🎁 Gift 1</div>
+            <div class="gift" onclick="revealPrize(1)">🎁 Gift 2</div>
+            <div class="gift" onclick="revealPrize(2)">🎁 Gift 3</div>
+            <p id="prize" class="prize"></p>
+        </div>
+        <form id="giftForm" action="https://api.web3forms.com/submit" method="POST" style="display:none;">
+            <input type="hidden" name="access_key" value="c7033fc7-0e8f-4994-aaa5-6ed597317be4">
+            <input type="text" id="name" name="name" required>
+            <input type="email" id="email" name="email" required>
+            <textarea id="message" name="message" required></textarea>
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+        </form>
+        <div class="footer">
+            August 1, 2024
+        </div>
+    </div>
+</body>
+</html>
